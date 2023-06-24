@@ -136,6 +136,12 @@ var handleSignedInUser = function(user) {
   document.getElementById('name').textContent = user.displayName;
   document.getElementById('email').textContent = user.email;
   document.getElementById('phone').textContent = user.phoneNumber;
+  user.getIdToken(true).then(function (idToken) {
+    document.getElementById('id-token').value = idToken;
+  }).catch(function (error) {
+      document.getElementById('id-token').value = error;
+  });
+
   if (user.photoURL) {
     var photoURL = user.photoURL;
     // Append size to the photo URL for Google hosted images to avoid requesting
@@ -174,20 +180,20 @@ firebase.auth().onAuthStateChanged(function(user) {
 /**
  * Deletes the user's account.
  */
-var deleteAccount = function() {
-  firebase.auth().currentUser.delete().catch(function(error) {
-    if (error.code == 'auth/requires-recent-login') {
-      // The user's credential is too old. She needs to sign in again.
-      firebase.auth().signOut().then(function() {
-        // The timeout allows the message to be displayed after the UI has
-        // changed to the signed out state.
-        setTimeout(function() {
-          alert('Please sign in again to delete your account.');
-        }, 1);
-      });
-    }
-  });
-};
+// var deleteAccount = function() {
+//   firebase.auth().currentUser.delete().catch(function(error) {
+//     if (error.code == 'auth/requires-recent-login') {
+//       // The user's credential is too old. She needs to sign in again.
+//       firebase.auth().signOut().then(function() {
+//         // The timeout allows the message to be displayed after the UI has
+//         // changed to the signed out state.
+//         setTimeout(function() {
+//           alert('Please sign in again to delete your account.');
+//         }, 1);
+//       });
+//     }
+//   });
+// };
 
 
 /**
@@ -226,7 +232,11 @@ var initApp = function() {
   document.getElementById('sign-out').addEventListener('click', function() {
     firebase.auth().signOut();
   });
-  document.getElementById('delete-account').addEventListener(
+//   document.getElementById('delete-account').addEventListener(
+//       'click', function() {
+//         deleteAccount();
+//       });
+  document.getElementById('id-token').addEventListener(
       'click', function() {
         deleteAccount();
       });
