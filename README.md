@@ -1,5 +1,27 @@
 [![Build Status](https://travis-ci.org/firebase/firebaseui-web.svg?branch=master)](https://travis-ci.org/firebase/firebaseui-web)
 
+# Branch tln_project
+
+Branch tln_project berisi custom pada Demo:
+- Disable fitur delete user
+- Tambah textarea untuk menampilkan token JWT
+
+## Quick Setup Untuk Run Demo
+- Install dependencies:
+```
+npm install
+npm install -g firebase-tools
+```
+- Copy `demo/public/sample-config.js` to `demo/public/config.js`, kemudian edit/sesuaikan dengan milik TLN
+- Build & run demo:
+```
+npm run build-demo
+```
+- Untuk selanjutnya bisa run tanpa build ulang:
+```
+npm run demo
+```
+
 # FirebaseUI for Web — Auth
 
 FirebaseUI is an open-source JavaScript library for Web that provides simple,
